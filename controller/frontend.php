@@ -7,6 +7,8 @@
 //chargement des classes
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
+require_once('model/UserManager.php');
+/*require_once('model/MemberManager.php');*/
 require_once('model/nb_page.php');
 
 
@@ -17,11 +19,7 @@ class Frontend{
         require('view/frontend/homeView.php');
 
     }
-
-    public function login(){
-        require('view/frontend/loginView.php');
-
-    }
+  
 
     public function listPosts(){
         $pagination = new \OpenClassrooms\Blog\Soso\Pagination();
@@ -96,6 +94,73 @@ class Frontend{
 
       require ('view/frontend/errorView.php');
     }
+
+    
+    public function login()
+    {
+        $error = null;
+        if (isset($_POST['pseudo']) AND isset($_POST['pass']))
+        {
+            $userManager = new \OpenClassrooms\Blog\Soso\UserManager();
+            $user = $userManager->get($_POST['pseudo']);
+            $pseudo = htmlspecialchars($_POST['pseudo']);
+                     
+            // Comparaison du pass envoyé via le formulaire avec la base
+            $isPasswordCorrect = password_verify($_POST['pass'], $user['pass']);
+               
+                if (!$user ) {
+                $error = 1;
+                }
+                else {
+                    if($isPasswordCorrect)
+                    {
+                       //session_start();
+                       $_SESSION['id'] = $user['id'];
+                       $_SESSION['pseudo'] = $pseudo;
+                      header('Location: index.php?action=admin');
+
+                      /*if(isset($_POST['cookie']) && $_POST['cookie'] == 'on')
+                        {
+                        $navigateur = (!empty($_SERVER['HTTP_USER_AGENT'])) ? $_SERVER['HTTP_USER_AGENT'] : '';
+                        $mot_de_passe = $resultat['pass'];
+                        //sha1('aaa'.$nom_utilisateur.'bbb'.$mot_de_passe.'ccc'.$navigateur.'ddd');
+                        $cookie_hache = sha1('aaa'.$_SESSION['pseudo'].'bbb'.$mot_de_passe.'ccc'.$navigateur.'ddd');;
+                        
+                        setcookie('pseudo', $_SESSION['pseudo'], time()+365*24*3600, '/');
+                        setcookie('cookie', $cookie_hache, time()+365*24*3600, '/');
+                        }*/
+                    }
+                    else{
+                    $error = 1;
+                    }    
+                }
+        }
+            
+        require('view/frontend/loginView.php');
+    }
+
+/*
+    public function connectProcess()
+    {
+        if (!empty($_POST['pseudo']) && !empty($_POST['password'])) {
+            $connectManager = new ConnectManager();
+            $login          = $connectManager->connect($_POST['pseudo'], sha1($_POST['password']));
+
+            if (!empty($login)) {
+                session_start();
+                $_SESSION['login'] = $login['id'];
+                header('location: index.php?action=admin');
+            } else {
+                throw new Exception(' membre non reconnu');
+            }
+        } else {
+            throw new Exception(' tous les champs ne sont pas remplis !');
+        }
+    }
+*/
+
+
+
 
 /* recup de index.php
 

@@ -2,8 +2,7 @@
 session_start ();
 
 include_once('controller/frontend.php');
-
-/*include_once('controller/Backend.php');*/
+include_once('controller/backend.php');
 
 
 class Routeur
@@ -20,11 +19,12 @@ class Routeur
                     "editComment" 	=> ["controller"=>"Frontend", "method" => 'editComment'],
                     "updateComment" 	=> ["controller"=>"Frontend", "method" => 'updateComment'],
                     "signalComment" =>["controller"=>"Frontend", "method" => 'signalComment'],
-                    "connect"		=> ["controller"=> 'Frontend', "method" => 'connectProcess']
+                    "admin"		=> ["controller"=> 'Backend', "method" => 'admin'],
+                    /*"connect"		=> ["controller"=> 'Frontend', "method" => 'connectProcess']*/
                         ];
 
-	/*private $routesAdmin = [
-              "adminchapters"		=> ["controller"=> 'Backend', "method" => 'adminchapters'],
+	private $routesAdmin = [
+              "admin"		=> ["controller"=> 'Backend', "method" => 'admin']/*,
               "adminAddChapter"		=> ["controller"=> 'Backend', "method" => 'adminAddChapter'],
               "adminDeleteChapter"	=> ["controller"=> 'Backend', "method" => 'adminDeletechapter'],
               "adminUpdatePageChapter"	=> ["controller"=> 'Backend', "method" => 'adminUpdatePageChapter'],
@@ -36,10 +36,10 @@ class Routeur
               "fastValideComment"	=> ["controller"=> 'Backend', "method" => 'adminFastValideComment'],
               "adminUpdatePageComment"	=> ["controller"=> 'Backend', "method" => 'adminUpdatePageComment'],
               "adminUpdateComment"	=> ["controller"=> 'Backend', "method" => 'adminUpdateComment'],
-              "destroy"	=> ["controller"=> 'Backend', "method" => 'sessiondestroy']
+              "destroy"	=> ["controller"=> 'Backend', "method" => 'sessiondestroy']*/
 						];
 
-*/
+
 	public function __construct($request)
 	{
 		$this->request = $request;
@@ -59,7 +59,7 @@ class Routeur
 				$currentController = new $controller();
 				$currentController->$method();
 			}
-			/*elseif (key_exists($request, $this->routesAdmin))
+			elseif (key_exists($request, $this->routesAdmin))
 			{
 				if (isset($_SESSION['login'])) // verifie qu'une session existe
 				{
@@ -73,7 +73,7 @@ class Routeur
 				{
 					throw new Exception(' vous n\'avez pas accès, veuillez vous connecter');
 				}
-			}*/
+			}
 			else
 			{
 				throw new Exception(' 404 aucune page trouvée');
