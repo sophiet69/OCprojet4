@@ -16,27 +16,19 @@ class Routeur
                     "listPosts"		=> ["controller"=> 'Frontend', "method" => 'listPosts'],
                     "post"		=> ["controller"=> 'Frontend', "method" => 'post'],
                     "addComment" 	=> ["controller"=>"Frontend", "method" => 'addComment'],
-                    "editComment" 	=> ["controller"=>"Frontend", "method" => 'editComment'],
-                    "updateComment" 	=> ["controller"=>"Frontend", "method" => 'updateComment'],
                     "signalComment" =>["controller"=>"Frontend", "method" => 'signalComment'],
-                    "admin"		=> ["controller"=> 'Backend', "method" => 'admin'],
-                    /*"connect"		=> ["controller"=> 'Frontend', "method" => 'connectProcess']*/
+                    "destroy"		=> ["controller"=> 'Frontend', "method" => 'destroy']
                         ];
 
 	private $routesAdmin = [
-              "admin"		=> ["controller"=> 'Backend', "method" => 'admin']/*,
-              "adminAddChapter"		=> ["controller"=> 'Backend', "method" => 'adminAddChapter'],
-              "adminDeleteChapter"	=> ["controller"=> 'Backend', "method" => 'adminDeletechapter'],
-              "adminUpdatePageChapter"	=> ["controller"=> 'Backend', "method" => 'adminUpdatePageChapter'],
-              "adminCommentsPage"	=> ["controller"=> 'Backend', "method" => 'adminCommentsPage'],
-              "adminUpdateChapter"	=> ["controller"=> 'Backend', "method" => 'adminUpdateChapter'],
-              "deleteComment"		=> ["controller"=> 'Backend', "method" => 'adminDeleteComment'],
-              "deleteFastComment"	=> ["controller"=> 'Backend', "method" => 'adminFastDeleteComment'],
-              "valideComment"		=> ["controller"=> 'Backend', "method" => 'adminValideComment'],
-              "fastValideComment"	=> ["controller"=> 'Backend', "method" => 'adminFastValideComment'],
-              "adminUpdatePageComment"	=> ["controller"=> 'Backend', "method" => 'adminUpdatePageComment'],
-              "adminUpdateComment"	=> ["controller"=> 'Backend', "method" => 'adminUpdateComment'],
-              "destroy"	=> ["controller"=> 'Backend', "method" => 'sessiondestroy']*/
+              "admin"		=> ["controller"=> 'Backend', "method" => 'admin'],
+              "postB"		=> ["controller"=> 'Backend', "method" => 'postB'],
+              "updatePost"	=> ["controller"=> 'Backend', "method" => 'displayUpdate'],
+              "submitUpdate"	=> ["controller"=> 'Backend', "method" => 'submitUpdate'],
+              "createPost"	=> ["controller"=> 'Backend', "method" => 'displayCreatePost'],
+              "submitPost"	=> ["controller"=> 'Backend', "method" => 'newPost'],
+              "deletePost"	=> ["controller"=> 'Backend', "method" => 'removePost'],
+              "deleteComment"	=> ["controller"=> 'Backend', "method" => 'removeComment']
 						];
 
 
@@ -61,7 +53,7 @@ class Routeur
 			}
 			elseif (key_exists($request, $this->routesAdmin))
 			{
-				if (isset($_SESSION['login'])) // verifie qu'une session existe
+				if (isset($_SESSION['id'])) // verifie qu'une session existe
 				{
 					$controller = $this->routesAdmin[$request]['controller'];
 					$method 	= $this->routesAdmin[$request]['method'];
