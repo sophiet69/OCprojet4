@@ -48,7 +48,8 @@ class Frontend{
         if (isset($_GET['id']) && $_GET['id'] > 0){
         	$postManager = new \OpenClassrooms\Blog\Soso\PostManager();
         	$commentManager = new \OpenClassrooms\Blog\Soso\CommentManager();
-
+            $reported=$commentManager->report($_GET['id']); //commentaire signalé
+            
             $post = $postManager->getPost($_GET['id']);
             $comments = $commentManager->getComments($_GET['id']);
         
@@ -201,7 +202,7 @@ class Frontend{
             }
         }
 
-*/
+
 
     public function editComment($postId, $commentId, $author, $comment) {
         require('view/frontend/commentView.php');//pour modifier un commentaire
@@ -219,7 +220,7 @@ class Frontend{
         else {
             header('Location: index.php?action=post&id=' . $postId);
         }
-    }
+    }*/
 
 }
 
