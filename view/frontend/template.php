@@ -1,4 +1,4 @@
-<!--
+
 <?php
 
 if (empty($_SESSION['id'])){
@@ -7,7 +7,7 @@ if (empty($_SESSION['id'])){
 }else{
 	$connected = true;
 }
-?>-->
+?>
 
 
 <!DOCTYPE html>
