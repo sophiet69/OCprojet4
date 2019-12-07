@@ -1,0 +1,129 @@
+body {
+    font-family: 'Exo', sans-serif !important;
+    background-color: #F1F1F1;
+
+}
+
+#bloc-page-newArticle, #bloc-page-updateArticle {
+    padding-bottom: 100px;
+}
+
+#bloc-page-viewArticle {
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.modal-content .close span {
+    font-family: 'Tahoma', sans-serif !important;
+    font-weight: 700;
+}
+
+label.error {
+    color: #da7300;
+}
+.jumbotron{
+  background-color: #CCCDCF!important;  
+}
+.btn{
+    margin-top: 10px !important;
+}
+
+#success{
+    font-size: 25px;
+    color: #459E30;
+    text-align: center;
+
+}
+
+
+/* Admin page */
+
+/* Data-tables */
+
+.pagination-custom {
+    margin-bottom: 50px !important;
+}
+
+
+#table-comments .bg-warning {
+    background-color: #ffaa76 !important;
+}
+
+.table-admin{
+    border:1px solid gray;
+}
+.thead-dark{
+    text-align: left;
+    
+}
+
+/* Admin */
+
+#admin-title-article {
+    margin-top: 20px;
+}
+
+#admin-title-comment {
+    margin-top: 50px !important;
+}
+
+/* Page New Article */
+
+#new-article-title, #update-article-title {
+    margin-top: 40px !important;
+    text-align: center!important;
+}
+#managerBlock{
+    margin: 20px;
+}
+.returnLink a{
+    text-decoration: none;
+    color: #fff;
+}
+.tox.tox-tinymce {
+    font-family: 'Exo', sans-serif;
+}
+
+/* Page viewArticle*/
+
+.news{
+    margin: 20px;
+}
+.news div{
+    background: #D4DDE5 !important;
+    padding: 5px 20px;
+    border-radius: 5px;
+}
+#chapitre{
+    margin: 0 20px 20px 20px;
+    border:2px dashed #D4DDE5;
+    border-radius: 10px;
+
+
+}
+
+/* Media Queries Header */
+
+/* Very small devices (0px and up) */
+@media (min-width: 0px) {
+
+    #table-blogspots_filter, #table-comments_filter {
+    margin-left: -15px;
+    }
+
+    div.dataTables_wrapper div.dataTables_length, div.dataTables_wrapper div.dataTables_filter {
+    text-align: left !important;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    
+    #table-blogspots_filter, #table-comments_filter {
+    margin-left: 0;
+    }
+
+    div.dataTables_wrapper div.dataTables_filter {
+        text-align: right !important;
+    }
+}
