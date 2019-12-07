@@ -25,6 +25,15 @@ class CommentManager extends Manager
         return $comments;
     }
     
+    public function getAllComments()
+    {
+        $db = $this->dbConnect();
+        $comments = $db->prepare('SELECT * FROM comments ORDER BY report DESC');
+        $comments->execute();
+
+        return $comments;
+    }
+    
     //pour ajouter un commentaire en BD
     /**
      * Add a comment in the database
@@ -50,7 +59,7 @@ class CommentManager extends Manager
      * @param string $author author of the comment
      * @param string $comment comment of the comment
      * @return boolean
-     */
+     
   
     public function updateComment($commentId, $author, $comment)
     {
@@ -63,7 +72,7 @@ class CommentManager extends Manager
         $com = $db->prepare('UPDATE comments SET author = :author, comment = :comment, comment_date = NOW() WHERE id = :id');
         $affectedLines = $com->execute($data);
         return $affectedLines;
-    }
+    }*/
 
     //pour signaler un commentaire en BD
     //
@@ -77,6 +86,31 @@ class CommentManager extends Manager
         return $com;
    
     }
+    public function reported()
+
+    {
+        $report=false;
+
+        $db = $this->dbConnect();
+    
+        $com = $db->query("SELECT * FROM `comments` WHERE `report`= 1 ");
+        
+        $queryReport=$com->fetch();
+       if($queryReport){
+        $report=true;
+       }
+
+        return $report;
+   
+    }
+
+    public function deleteComment($commentId) {
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare('DELETE FROM comments WHERE id = ?');
+        $deletedComment = $req->execute(array($commentId));
+        return $deletedComment;
+    }
+
    
 
 }
