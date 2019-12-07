@@ -260,24 +260,7 @@ h2{
 }
 
 
-/* Sur les écrans, quand la largeur de la fenêtre fait au minimum 1024px */
-@media screen and (min-width: 1024px)
-{
-    .box-icone {
-        
-        display: flex;
-        
-        flex-wrap: nowrap;
-        margin-right: 0; 
-        margin-left: 0;
-    }
 
-    .feature-box{
-    margin-right: 20px;
-    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
-    }
-
-}
 
 /*footer*/
 
@@ -299,4 +282,64 @@ footer p{
 
 .text-center {
     text-align: center!important;
+}
+
+/* MEDIA QUERIES*/
+
+/* Sur les écrans, quand la largeur de la fenêtre fait au minimum 1024px */
+@media screen and (min-width: 1024px)
+{
+    .box-icone {
+        
+        display: flex;
+        
+        flex-wrap: nowrap;
+        margin-right: 0; 
+        margin-left: 0;
+    }
+
+    .feature-box{
+    margin-right: 20px;
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    }
+
+}
+
+
+/* Sur tous types d'écran, quand la largeur de la fenêtre est comprise entre 737px et 1280px */
+@media all and (min-width: 737px) and (max-width: 1280px){
+
+    body{
+        height: 50%;
+    }
+    #connect{
+        height: 140%;
+    }
+}
+
+/* Sur tous types d'écrans taille max 736px */
+@media all  and  (max-width: 736px){
+
+    #home-project-alaska {
+        
+        margin: 20px;
+    }
+
+    #chapitres, #chapitre, #comments, #make-comment, #connect {
+    
+    margin: 5px 12px 12px 12px !important;
+    }
+
+    #comments h2{
+        padding: 0px;
+    }
+
+    .btn-danger{
+        left: 0px !important;
+    }
+
+
+
+    
+
 }
