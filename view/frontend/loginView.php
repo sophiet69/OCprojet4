@@ -34,6 +34,10 @@
 
 <?php $content = ob_get_clean(); ?>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+<script src="public/js/login.js"></script>
+
 
 
 <?php require('template.php'); ?>
