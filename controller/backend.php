@@ -1,4 +1,3 @@
-
 <?php
 
 //<!--fait le lien entre modele et affichage :controleur -->
