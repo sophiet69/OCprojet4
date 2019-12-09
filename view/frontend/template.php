@@ -11,28 +11,28 @@ if (empty($_SESSION['id'])){
 
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="utf-8" />
         <title><?= $title ?></title>
     	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" type="image/png" href="public/images/logo.png"/>
-		<!--SEO A FAIRE-->
-		<!-- Metadescription 
-		<meta name="description" content="Location de vélos à Lyon : sélectionnez votre station et reservez votre vélo dans la région lyonnaise. ">
-		<meta name="keywords" content="vélo, vélos, location vélos, lyon, se déplacer à vélo" />-->
-		<!-- Opengraph RESEAUX SOCIAUX Facebook
-		<meta property="og:title" content="Location de vélos à Lyon" />
+		<!--SEO -->
+		<!-- Metadescription -->
+		<meta name="description" content="Blog de Jean Forteroche: Découvrez son nouveau roman billet simple pour l'Alaska. ">
+		
+		<!-- Opengraph RESEAUX SOCIAUX Facebook-->
+		<meta property="og:title" content="Blog de Jean Forteroche" />
 		<meta property="og:type" content="article" />
-		<meta property="og:url" content="https://locationvelo.000webhostapp.com/" />
-		<meta property="og:image" content="https://locationvelo.000webhostapp.com/images/logoVelo70x70.png" />
-		<meta property="og:description" content="Location de vélos à Lyon : sélectionnez votre station et reservez votre vélo dans la région lyonnaise." />-->
-		<!-- Twitter card 
+		<meta property="og:url" content="https://blog-ecrivain.000webhostapp.com/" />
+		<meta property="og:image" content="https://blog-ecrivain.000webhostapp.com/images/logo.png" />
+		<meta property="og:description" content="Blog de Jean Forteroche: Découvrez son nouveau roman billet simple pour l'Alaska." />
+		<!-- Twitter card -->
 		<meta name='twitter:card' content='summary' />
-		<meta name='twitter:site' content='@locationvelo' />
-		<meta name='twitter:title' content='Location de vélos à Lyon' />
-		<meta name='twitter:description' content='Location de vélos à Lyon : sélectionnez votre station et reservez votre vélo dans la région lyonnaise.'/>
-		<meta name='twitter:image' content='https://locationvelo.000webhostapp.com/images/logoVelo70x70.png' />-->
+		<meta name='twitter:site' content='@jeanforteroche' />
+		<meta name='twitter:title' content='Blog de Jean Forteroche' />
+		<meta name='twitter:description' content="Blog de Jean Forteroche: Découvrez son nouveau roman billet simple pour l'Alaska."/>
+		<meta name='twitter:image' content='https://locationvelo.000webhostapp.com/images/logo.png' />
 
 		
 		<!-- Google Fonts -->
@@ -80,12 +80,13 @@ if (empty($_SESSION['id'])){
 			<!-- content -->
 		    <?= $content ?>
 	    </div>
-	</body>
-
-	<footer class="text-center">
+		<footer class="text-center">
 		<a href="#">
       		<span class="fas fa-chevron-up"></span>
-    	</a>
-    	<p>Copyright © 2019. Tous droits réservés. Réalisé par Sophie TORRESAN. <br>Les chapitres utilisés sont largement inspirés du Roman de Paul Bourget: VOYAGEUSES (1897) - texte libre de droit</p>
-	</footer>
+		</a>
+		<p>Copyright © 2019. Tous droits réservés. Réalisé par Sophie TORRESAN. <br>Les chapitres utilisés sont largement inspirés du Roman de Paul Bourget: VOYAGEUSES (1897) - texte libre de droit</p>
+		</footer>
+	</body>
+
+	
 </html>
