@@ -13,8 +13,8 @@ class UserManager extends Manager
    {
       $db = $this->dbConnect();
     //recuperation des donnees
-      $requete = $db->prepare('SELECT id, pass FROM membres WHERE pseudo = :pseudo ');
-      $requete-> execute(array('pseudo' => $pseudo));
+      $requete = $db->prepare('SELECT id, pass FROM membres WHERE pseudo = ? ');
+      $requete-> execute(array($pseudo));
     return $requete->fetch();
    }
 
