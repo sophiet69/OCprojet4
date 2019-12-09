@@ -86,6 +86,6 @@ if (empty($_SESSION['id'])){
 		<a href="#">
       		<span class="fas fa-chevron-up"></span>
     	</a>
-    	<p>Copyright © 2019. Tous droits réservés. Réalisé par Sophie TORRESAN.</p>
+    	<p>Copyright © 2019. Tous droits réservés. Réalisé par Sophie TORRESAN. <br>Les chapitres utilisés sont largement inspirés du Roman de Paul Bourget: VOYAGEUSES (1897) - texte libre de droit</p>
 	</footer>
 </html>
