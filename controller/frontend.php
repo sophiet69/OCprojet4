@@ -107,7 +107,7 @@ class Frontend{
             $pseudo = htmlspecialchars($_POST['pseudo']);
                      
             // Comparaison du pass envoyé via le formulaire avec la base
-            $isPasswordCorrect = password_verify($_POST['pass'], $user['pass']);
+            $isPasswordCorrect = ($_POST['pass'] = $user['pass']);
                
                 if (!$user ) {
                 $error = 1;
