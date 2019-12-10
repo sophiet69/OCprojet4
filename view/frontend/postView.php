@@ -58,7 +58,7 @@ while ($comment = $comments->fetch())
 <section id="make-comment">
 <h2 class="text-white">Laisser un commentaire</h2>
 
-<form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
+<form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>#comments" method="post">
     <div>
         <label for="author">Votre pseudo</label><br />
         <input class="form-control" type="text" id="author" name="author" placeholder="Pseudo" />
