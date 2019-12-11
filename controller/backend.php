@@ -93,6 +93,12 @@ class Backend{
         $deletedComment = $commentManager->deleteComment($_GET['id']);
         Header('Location: index.php?action=admin&remove-comment=success');
     }
+	
+	public function acceptComment(){
+        $commentManager = new \OpenClassrooms\Blog\Soso\CommentManager();
+        $acceptedComment = $commentManager->acceptComment($_GET['id']);
+        Header('Location: index.php?action=admin&accept-comment=success');
+    }
 
 
 /*
