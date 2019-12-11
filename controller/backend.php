@@ -16,6 +16,7 @@ class Backend{
     public function admin(){
     	$postManager= new \OpenClassrooms\Blog\Soso\PostManager();
         $commentManager = new \OpenClassrooms\Blog\Soso\CommentManager();
+	$memberManager = new \OpenClassrooms\Blog\Soso\UserManager();
         $reported=$commentManager->reported(); //commentaire signalé
 
         $pagination = new \OpenClassrooms\Blog\Soso\Pagination();
@@ -32,6 +33,7 @@ class Backend{
 
         $posts = $postManager->getPosts($cPage, $postsPerPage);
         $comments = $commentManager->getAllComments();
+	    $members = $memberManager->getMembers();
 		
 
         require('view/backend/admin.php');
@@ -99,6 +101,29 @@ class Backend{
         $acceptedComment = $commentManager->acceptComment($_GET['id']);
         Header('Location: index.php?action=admin&accept-comment=success');
     }
+	public function displayCreateMember() {
+    require('view/backend/createMemberView.php');
+    }
+
+    public function removeMember() {
+    $memberManager = new \OpenClassrooms\Blog\Soso\UserManager();
+    $deletedMember = $memberManager->deleteMember($_GET['id']);
+    Header('Location: index.php?action=admin&remove-member=success');   
+    }
+
+    
+
+    public function addMember() {
+    $memberManager = new \OpenClassrooms\Blog\Soso\UserManager();
+
+    $pass = htmlspecialchars($_POST['pass']);
+    $pass_hache = password_hash($_POST['pass'], PASSWORD_DEFAULT);// Hachage du mot de passe
+    
+    $newMember = $memberManager->createMember($_POST['pseudo'], $_POST['pass']);
+    
+    // redirige vers page d'accueil avec le nouveau paramètre
+    Header('Location: index.php?action=admin&add-member=success');
+    } 
 
 
 /*
