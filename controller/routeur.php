@@ -29,7 +29,10 @@ class Routeur
               "submitPost"	=> ["controller"=> 'Backend', "method" => 'newPost'],
               "deletePost"	=> ["controller"=> 'Backend', "method" => 'removePost'],
               "deleteComment"	=> ["controller"=> 'Backend', "method" => 'removeComment'],
-		"acceptComment"	=> ["controller"=> 'Backend', "method" => 'acceptComment']
+		"acceptComment"	=> ["controller"=> 'Backend', "method" => 'acceptComment'],
+		"createMember"	=> ["controller"=> 'Backend', "method" => 'displayCreateMember'],
+              "submitMember"	=> ["controller"=> 'Backend', "method" => 'addMember'],
+               "deleteMember"	=> ["controller"=> 'Backend', "method" => 'removeMember']
 						];
 
 
