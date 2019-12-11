@@ -73,6 +73,14 @@ class CommentManager extends Manager
         $affectedLines = $com->execute($data);
         return $affectedLines;
     }*/
+    
+    public function acceptComment($commentId)
+    {
+        $db = $this->dbConnect();
+        $query = $db->prepare("UPDATE comments SET report = 0 WHERE id = ?");
+        $result = $query->execute(array($commentId));
+        return $result;
+    }
 
     //pour signaler un commentaire en BD
     //
