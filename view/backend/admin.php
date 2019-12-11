@@ -64,6 +64,11 @@ ob_start();
         echo '<p id="success">Le commentaire a bien été supprimé !</p>';
     }
     ?>
+    <?php 
+    if (isset($_GET['accept-comment']) &&  $_GET['accept-comment'] == 'success') {
+        echo '<p id="success">Le commentaire a bien été accepté !</p>';
+    }
+    ?>
 
     <h2 id="admin-title-article" class="mb-4 mr-4 d-inline-block">Vos articles</h2><a href="index.php?action=createPost" class="d-inline-block btn btn-primary mb-2" role="button">Ajouter</a>
     <div class="table-responsive">
@@ -175,7 +180,7 @@ ob_start();
                     <th scope="col">Commentaire</th>
                     <th scope="col">N° du chapitre</th>
                     <th scope="col">Etat du commentaire</th>
-                    <th scope="col">Supprimer</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             
@@ -202,10 +207,10 @@ ob_start();
                             }?>
                                 
                         </td>
-                    
-                        <td>
+                         <td id="boutons"><a href="index.php?action=acceptComment&amp;id=<?= $comment['id']; ?>" title="Accepter le commentaire" class="btn btn-success mb-2" role="button"><span class="fas fa-check"></span></a><button type="button" title="Supprimer le commentaire" class="btn btn-danger mb-2" data-toggle="modal" data-target="#commentaire<?=$comment['id']; ?>"><span class="fas fa-trash-alt"></span></button></td>
+                        <!--<td>
                         <button type="button" title="Supprimer le commentaire" class="btn btn-danger mb-2" data-toggle="modal" data-target="#commentaire<?=$comment['id']; ?>"><span class="fas fa-trash-alt"></span></button>
-                        </td>
+                        </td>-->
     
 
                         <div class="modal fade" id="commentaire<?=$comment['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="supprimer un commentaire" aria-hidden="true"> 
