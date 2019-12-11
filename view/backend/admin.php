@@ -63,11 +63,19 @@ ob_start();
     if (isset($_GET['remove-comment']) &&  $_GET['remove-comment'] == 'success') {
         echo '<p id="success">Le commentaire a bien été supprimé !</p>';
     }
-    ?>
-    <?php 
-    if (isset($_GET['accept-comment']) &&  $_GET['accept-comment'] == 'success') {
+     
+    elseif (isset($_GET['accept-comment']) &&  $_GET['accept-comment'] == 'success') {
         echo '<p id="success">Le commentaire a bien été accepté !</p>';
     }
+    elseif (isset($_GET['add-member']) &&  $_GET['add-member'] == 'success') {
+        echo '<p id="success">Le membre a bien été ajouté !</p>';
+    }
+    elseif (isset($_GET['remove-member']) &&  $_GET['remove-member'] == 'success') {
+        echo '<p id="success">Le membre a bien été supprimé !</p>';
+    }
+    /*elseif (isset($_GET['update-member']) &&  $_GET['update-member'] == 'success') {
+        echo '<p id="success">Le mot de passe est sécurisé</p>';
+    }*/
     ?>
 
     <h2 id="admin-title-article" class="mb-4 mr-4 d-inline-block">Vos articles</h2><a href="index.php?action=createPost" class="d-inline-block btn btn-primary mb-2" role="button">Ajouter</a>
@@ -236,56 +244,77 @@ ob_start();
                 $comments->closeCursor();
                 ?>  
         
-                <!--
-               
-                <?php
-                // on affiche chaque entrée dans une boucle, avec du htmlspecialchars sur les données publiées
-                // 
-                // 
-                foreach ($comments as $comment) {
-                   
-                    ?>-->
+               </tbody>
+        </table>
+    </div> 
+    
+    <div id="memberManage">
+            <h3 class="headPost">Gestion des membres</h3><a href="index.php?action=createMember" class="d-inline-block btn btn-primary mb-2" role="button">Ajouter</a>
                 
-                    <!-- on ferme PHP pour la clarté du code -->
-         
-                 <!--   <tr <?php if ($reported) { ?> class="bg-warning" <?php } ?>>
-                        <th scope="row"><?= $comment->$_GET['pseudo']; ?></th>
-                        <td>Publié le <?= date_format(date_create($comment->$_GET['comment_date']), 'd/m/Y à H:i:s') ?></td>
-                        <td><?= substr($comment->$_GET['comment'], 0, 50) ?><span class="text-muted">[...]</span></td>
-                        <td><?= $comment->$_GET['title'] ;?></td>
-                        <td><a href="index.php?action=view&id=<?= $comment->$_GET['post_id'] ; ?>#comment<?= $comment->$_GET['id'] ; ?>" title="Voir le commentaire" class="btn btn-secondary" role="button"><span class="far fa-eye"></span></a></td>
-                        <td><?php if ($reported) { ?><a href="index.php?action=admin&comment=<?= $comment->$_GET['id'] ; ?>&event=accept" title="Accepter le commentaire" class="btn btn-success mb-2" role="button"><span class="fas fa-check"></span></a> <?php } ?><button type="button" title="Supprimer le commentaire" class="btn btn-danger mb-2" data-toggle="modal" data-target="#comment<?= $comment->$_GET['id'] ; ?>"><span class="fas fa-trash-alt"></span></a></td>
-                    </tr>
-                -->
+                <div class="table-responsive">
+                    <table id="table-comments" class="table table-striped table-admin">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Identifiant</th>
+                            <th>Pseudo</th>
+                            <!--<th class="center-bouton"><span class="fas fa-exclamation-circle"> </span> Sécuriser le mot de passe*</th>-->
+                            <th>Supprimer</th>
+                        </tr>
+                    </thead>
+                        <?php
+                            
+                            while ($member = $members->fetch()) {
+                                if(!empty($member)) {
+                        ?>
+                                <tr>
+                                    <td><?= $member['id']; ?></td>
+                                    <td><?= $member['pseudo']; ?></td>
 
-                    <!-- Modal du bouton supprimer -->
+                                    <!--<td class="center-bouton"><a href="index.php?action=updateMember&amp;id=<?= $member['id']; ?>" title="Hacher le mot de passe" class="btn btn-secondary"><span class="fas fa-unlock-alt" role="button"></span></a></td>-->
+                                    
+                                    <td><button type="button" title="Supprimer le membre" class="btn btn-danger mb-2" data-toggle="modal" data-target="#member<?=$member['id']; ?>"><span class="fas fa-trash-alt"></span></button></td>
 
-                    <!--
-                    <div class="modal fade" id="comment<?= $comment->getId() ?>" tabindex="-1" role="dialog" aria-labelledby="supprimer un commentaire" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalDeleteComment">Êtes-vous certain(e) de supprimer ce commentaire ?</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                    <a href="index.php?action=admin&comment=<?= $comment->getId() ?>&event=delete" class="btn btn-danger">Supprimer</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
+                        
+
+                                    <div class="modal fade" id="member<?=$member['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="supprimer un membre" aria-hidden="true"> 
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalDeleteComment">Êtes-vous certain(e) de supprimer ce membre ?</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                                    <a href="index.php?action=deleteMember&amp;id=<?= $member['id']; ?>" class="btn btn-danger">Supprimer</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </tr>
+                        <?php
+                                } else {
+                                    echo "<p>Pas de membres enregistrés</p>";
+                                }
+                            }
+                        ?>
+                    </table>
+                    <!--<p class="lead text-danger text-justify">* Ceci est a utiliser si le membre est ajouté depuis la base de données afin de hacher le mot de passe .</p>-->
+                </div> 
+                <?php
+                    $members->closeCursor();
+                ?>
+
+            </div>
 
                 <?php // on réouvre PHP avant de finir la boucle
                 }
                 ?>
 
        
-            </tbody>
-        </table>
-    </div>
+            
 </div>
 
 <?php $content = ob_get_clean(); ?>
