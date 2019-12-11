@@ -102,6 +102,15 @@ label.error {
 
 }
 
+/*Comments*/
+
+#boutons{
+    display: flex !important;
+    flex-wrap: nowrap!important;
+    padding: 0px 5px!important;
+
+}
+
 /* Media Queries */
 
 /* Very small devices (0px and up) */
