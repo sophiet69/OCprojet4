@@ -5,12 +5,20 @@
 //<!--fait le lien entre modele et affichage :controleur -->
 
 //chargement des classes
+/*
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 require_once('model/UserManager.php');
-/*require_once('model/MemberManager.php');*/
-require_once('model/nb_page.php');
+require_once('model/nb_page.php');*/
 
+use \OpenClassrooms\Blog\Soso\Autoloader;
+use \OpenClassrooms\Blog\Soso\PostManager;
+use \OpenClassrooms\Blog\Soso\Pagination;
+use \OpenClassrooms\Blog\Soso\CommentManager;
+use \OpenClassrooms\Blog\Soso\UserManager;
+
+require_once 'Autoloader.php';
+Autoloader::register();
 
 
 class Frontend{
@@ -22,8 +30,8 @@ class Frontend{
   
 
     public function listPosts(){
-        $pagination = new \OpenClassrooms\Blog\Soso\Pagination();
-    	$postManager = new \OpenClassrooms\Blog\Soso\PostManager(); //création d'un objet
+        $pagination = new Pagination();
+    	$postManager = new PostManager(); //création d'un objet
 
         $postsPerPage = 2;
         $nbPosts = $pagination ->getPostsPagination();
@@ -46,8 +54,8 @@ class Frontend{
 
     public function post() {
         if (isset($_GET['id']) && $_GET['id'] > 0){
-        	$postManager = new \OpenClassrooms\Blog\Soso\PostManager();
-        	$commentManager = new \OpenClassrooms\Blog\Soso\CommentManager();
+        	$postManager = new PostManager();
+        	$commentManager = new CommentManager();
             $reported=$commentManager->report($_GET['id']); //commentaire signalé
             
             $post = $postManager->getPost($_GET['id']);
@@ -64,7 +72,7 @@ class Frontend{
     public function addComment() {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                $commentManager = new \OpenClassrooms\Blog\Soso\CommentManager();
+                $commentManager = new CommentManager();
                 $affectedLines = $commentManager->postComment($_GET['id'], htmlspecialchars($_POST['author']), nl2br(htmlspecialchars($_POST['comment'])));
                 if ($affectedLines === false) {
                         throw new Exception('Impossible d\'ajouter le commentaire !');
@@ -79,7 +87,7 @@ class Frontend{
     public function signalComment(){
         if (isset($_GET['id']) && $_GET['id'] > 0 && isset($_GET['post_id']) && $_GET['post_id'] > 0 && isset($_GET['event']) && $_GET['event'] =='report'){
 
-            $commentManager = new \OpenClassrooms\Blog\Soso\CommentManager(); 
+            $commentManager = new CommentManager(); 
             $comments = $commentManager->report($_GET['id']);
 
             require('view/frontend/signalCommentView.php');
@@ -102,7 +110,7 @@ class Frontend{
         $error = null;
         if (isset($_POST['pseudo']) AND isset($_POST['pass']))
         {
-            $userManager = new \OpenClassrooms\Blog\Soso\UserManager();
+            $userManager = new UserManager();
             $user = $userManager->get($_POST['pseudo']);
             $pseudo = htmlspecialchars($_POST['pseudo']);
                      
