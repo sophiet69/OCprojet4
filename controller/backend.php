@@ -3,10 +3,21 @@
 //<!--fait le lien entre modele et affichage :controleur -->
 
 //chargement des classes
+/*
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 require_once('model/UserManager.php');
-require_once('model/nb_page.php');
+require_once('model/nb_page.php');*/
+
+// namespaces utilisés
+use \OpenClassrooms\Blog\Soso\Autoloader;
+use \OpenClassrooms\Blog\Soso\PostManager;
+use \OpenClassrooms\Blog\Soso\Pagination;
+use \OpenClassrooms\Blog\Soso\CommentManager;
+use \OpenClassrooms\Blog\Soso\UserManager;
+
+require_once 'Autoloader.php';
+Autoloader::register();
 
 
 
@@ -14,12 +25,12 @@ class Backend{
 
    
     public function admin(){
-    	$postManager= new \OpenClassrooms\Blog\Soso\PostManager();
-        $commentManager = new \OpenClassrooms\Blog\Soso\CommentManager();
-	$memberManager = new \OpenClassrooms\Blog\Soso\UserManager();
+    	$postManager= new PostManager();
+        $commentManager = new CommentManager();
+	$memberManager = new UserManager();
         $reported=$commentManager->reported(); //commentaire signalé
 
-        $pagination = new \OpenClassrooms\Blog\Soso\Pagination();
+        $pagination = new Pagination();
 			$postsPerPage = 6;
 			$nbPosts = $pagination->getPostsPagination();
 			$nbPage = $pagination->getPostsPages($nbPosts, $postsPerPage);
@@ -43,7 +54,7 @@ class Backend{
 
     public function postB() {
         if (isset($_GET['id']) && $_GET['id'] > 0){
-        	$postManager = new \OpenClassrooms\Blog\Soso\PostManager();
+        	$postManager = new PostManager();
             $post = $postManager->getPost($_GET['id']);
             
         
@@ -57,7 +68,7 @@ class Backend{
 
 
     public function displayUpdate() {
-		$postManager = new \OpenClassrooms\Blog\Soso\PostManager();
+		$postManager = new PostManager();
 		$post = $postManager->getPost($_GET['id']);
 		require('view/backend/updatePostView.php');
 	}
@@ -69,7 +80,7 @@ class Backend{
 	public function submitUpdate() {
 		if (isset($_GET['id']) && $_GET['id'] > 0) {
 
-			$postManager = new \OpenClassrooms\Blog\Soso\PostManager();
+			$postManager = new PostManager();
 			
 			$updated = $postManager->updatePost($_POST['title'], $_POST['content'], $_GET['id']);
 			Header('Location: index.php?action=admin&update-status=success');
@@ -80,24 +91,24 @@ class Backend{
 	}
 
 	public function newPost() {
-		$postManager = new \OpenClassrooms\Blog\Soso\PostManager();
+		$postManager = new PostManager();
 		$newPost = $postManager->createPost($_POST['title'], $_POST['content']);
 		Header('Location: index.php?action=admin&new-post=success');
 	}
 	public function removePost() {
-		$postManager = new \OpenClassrooms\Blog\Soso\PostManager();
+		$postManager = new PostManager();
 		$deletedPost = $postManager->deletePost($_GET['id']);
 		Header('Location: index.php?action=admin&remove-post=success');
 	}
 
     public function removeComment() {
-        $commentManager = new \OpenClassrooms\Blog\Soso\CommentManager();
+        $commentManager = new CommentManager();
         $deletedComment = $commentManager->deleteComment($_GET['id']);
         Header('Location: index.php?action=admin&remove-comment=success');
     }
 	
 	public function acceptComment(){
-        $commentManager = new \OpenClassrooms\Blog\Soso\CommentManager();
+        $commentManager = new CommentManager();
         $acceptedComment = $commentManager->acceptComment($_GET['id']);
         Header('Location: index.php?action=admin&accept-comment=success');
     }
@@ -106,7 +117,7 @@ class Backend{
     }
 
     public function removeMember() {
-    $memberManager = new \OpenClassrooms\Blog\Soso\UserManager();
+    $memberManager = new UserManager();
     $deletedMember = $memberManager->deleteMember($_GET['id']);
     Header('Location: index.php?action=admin&remove-member=success');   
     }
@@ -114,7 +125,7 @@ class Backend{
     
 
     public function addMember() {
-    $memberManager = new \OpenClassrooms\Blog\Soso\UserManager();
+    $memberManager = new UserManager();
 
     $pass = htmlspecialchars($_POST['pass']);
     $pass_hache = password_hash($_POST['pass'], PASSWORD_DEFAULT);// Hachage du mot de passe
