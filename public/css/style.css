@@ -342,8 +342,7 @@ footer p{
         width: 100%;
     } 
     html{
-        width:380px;
-        margin: 0px;
+        width:100%;
         padding: 0px;
     }
     .navbar{
@@ -352,10 +351,7 @@ footer p{
         padding: 0px;
     }
 
-    #bloc-page{
-        width: 380px;
-        /*height: 580px;*/
-    }
+   
     #connect{
         padding-left: 20px;
         padding-right: 0px;
@@ -366,7 +362,7 @@ footer p{
         padding: 50px 0px;}
 
     footer{
-        width: 110%;
+        width: 100%;
 
     }
 
