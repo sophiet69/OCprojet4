@@ -1,7 +1,6 @@
 <?php
 
 // Gestionnaire de commentaires  :on y regroupe toutes nos fonction qui concerne les commentaires
-//ANCIEN: récupere et traite les données :modele
 
 namespace OpenClassrooms\Blog\Soso;
 
@@ -74,16 +73,9 @@ class CommentManager extends Manager
         return $affectedLines;
     }*/
     
-    public function acceptComment($commentId)
-    {
-        $db = $this->dbConnect();
-        $query = $db->prepare("UPDATE comments SET report = 0 WHERE id = ?");
-        $result = $query->execute(array($commentId));
-        return $result;
-    }
-
+    
     //pour signaler un commentaire en BD
-    //
+    
     public function report($commentId)
 
     {
@@ -118,6 +110,36 @@ class CommentManager extends Manager
         $deletedComment = $req->execute(array($commentId));
         return $deletedComment;
     }
+    
+    /**
+     * Update a comment in database
+     * @param int $commentId id of the comment
+     * @param report of the comment
+     */
+     
+    public function acceptComment($commentId)
+    {
+        $db = $this->dbConnect();
+        $query = $db->prepare("UPDATE comments SET report = 0 WHERE id = ?");
+        $result = $query->execute(array($commentId));
+        return $result;
+    }
+    
+    
+    /**
+     * Delete all Comments in database when delete post
+     * @param int $postId id of the post
+     * @return boolean
+     */
+    
+    public function deleteComments($postId)
+    {
+        $db = $this->dbConnect();
+        $comments = $db->prepare('DELETE FROM comments WHERE post_id= ?');
+        $deleteComments = $comments->execute(array($postId));
+        return $deleteComments;
+    }
+
 
    
 
