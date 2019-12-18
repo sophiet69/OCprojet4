@@ -95,11 +95,35 @@ class Backend{
 		$newPost = $postManager->createPost($_POST['title'], $_POST['content']);
 		Header('Location: index.php?action=admin&new-post=success');
 	}
+	/*
 	public function removePost() {
 		$postManager = new PostManager();
 		$deletedPost = $postManager->deletePost($_GET['id']);
 		Header('Location: index.php?action=admin&remove-post=success');
 	}
+	*/
+	
+	public function removePost() {
+        $postManager = new PostManager();
+        $commentManager = new CommentManager();
+
+        $deletedPost = $postManager->deletePost($_GET['id']);
+        $deleteComments = $commentManager->deleteComments($_GET['id']);
+
+		if($deletedPost === false)
+		{
+		    throw new Exception('Impossible de supprimer le chapitre' );
+		}
+		elseif ($deleteComments === false)
+		{
+		    throw new Exception('Impossible de supprimer les commentaire du chapitre' );
+		}
+		else
+		{
+		    Header('Location: index.php?action=admin&remove-post=success');
+		}
+        
+    	}
 
     public function removeComment() {
         $commentManager = new CommentManager();
@@ -123,7 +147,6 @@ class Backend{
     }
 
     
-
     public function addMember() {
     $memberManager = new UserManager();
 
@@ -135,59 +158,6 @@ class Backend{
     // redirige vers page d'accueil avec le nouveau paramètre
     Header('Location: index.php?action=admin&add-member=success');
     } 
-
-
-/*
-public function newArticle()
-    {
-        $this->sessionExists();
-        $error = null;
-        if (!empty($_POST)) // on rentre dans la condition si POST n'est pas vide
-        {
-            $validation = true;
-            if (empty($_POST['title']) && empty($_POST['text'])) {
-                $error = 1; // message vide
-                $validation = false;
-            }
-            if (strlen($_POST['title']) > 255) {
-                $error = 2; // titre trop long
-                $validation = false;
-            }
-            if ($validation) // si pas d'erreurs
-            {
-                // définit la variable qui indique si le billet est publié en ligne ou enregistré en brouillon
-                if (isset($_POST['submit'])) {
-                    $online = 1;
-                } else if (isset($_POST['draft'])) {
-                    $online = 0;
-                }
-                // crée l'objet Article et ses valeurs
-                $article = new Article([
-                    'title' => $_POST['title'],
-                    'content' => $_POST['text'],
-                    'on_line' => $online
-                ]);
-                // instanciation de la classe ArticleManager, qui lance la connexion à la BDD
-                $articleManager = new ArticleManager();
-                $articleManager->add($article); // ajout de l'article à la BDD
-                // redirection vers la page d'administration
-                header('Location: index.php?action=admin&success=newArticle');
-            }
-            
-        }
-        switch ($error) {
-            case 1:
-                $error = '<p class="text-danger">Message vide !</p>';
-                break;
-            case 2:
-                $error = '<p class="text-danger">Titre trop long !</p>';
-                break;
-        }
-        
-        require('view/backend/newArticle.php');
-    }
-
- */
 
 
 
